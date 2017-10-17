@@ -62,6 +62,7 @@ class osquery (
   $package_ver    = $::osquery::params::package_ver,
   $service_enable = $::osquery::params::service_enable,
   $settings       = $::osquery::params::settings,
+  $flags          = $::osquery::params::flags,
   $repo_install   = $::osquery::params::repo_install,
 
 ) inherits ::osquery::params {
@@ -70,6 +71,7 @@ class osquery (
   validate_string($service_name)
   validate_bool($service_enable)
   validate_hash($settings)
+  validate_array($flags)
   validate_bool($repo_install)
 
   class { '::osquery::install': } -> class { '::osquery::config': } ~> class { '::osquery::service': } -> Class['::osquery']

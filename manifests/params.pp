@@ -18,12 +18,14 @@ class osquery::params {
       },
     },
   }
+  $flags = []
 
   $package_name   = 'osquery'
   $service_name   = 'osqueryd'
   $package_ver    = 'latest' # or present
   $service_enable = true
   $config         = '/etc/osquery/osquery.conf'
+  $flag_config    = '/etc/osquery/osquery.flags'
   $repo_install   = true
 
   case $::operatingsystem {

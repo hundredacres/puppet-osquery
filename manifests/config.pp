@@ -10,4 +10,12 @@ class osquery::config {
     notify  => Service[$::osquery::service_name],
   }
 
+  file { $::osquery::flag_config:
+    ensure  => present,
+    owner   => root,
+    group   => root,
+    content => $::osquery::flags)
+    require => Package[$::osquery::package_name],
+    notify  => Service[$::osquery::service_name],
+  }
 }
