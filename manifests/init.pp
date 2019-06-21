@@ -57,13 +57,13 @@
 #
 class osquery (
 
-  String $package_name    = $::osquery::params::package_name,
-  String $service_name    = $::osquery::params::service_name,
-  String $package_ver     = $::osquery::params::package_ver,
-  Boolean $service_enable = $::osquery::params::service_enable,
-  Hash $settings          = $::osquery::params::settings,
-  Array $flags            = $::osquery::params::flags,
-  Boolean $repo_install   = $::osquery::params::repo_install,
+  String $package_name         = $::osquery::params::package_name,
+  String $service_name         = $::osquery::params::service_name,
+  String $package_ver          = $::osquery::params::package_ver,
+  Boolean $service_enable      = $::osquery::params::service_enable,
+  Hash $settings               = $::osquery::params::settings,
+  Variant[Array,String] $flags = $::osquery::params::flags,
+  Boolean $repo_install        = $::osquery::params::repo_install,
 
 ) inherits ::osquery::params {
 
