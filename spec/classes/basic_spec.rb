@@ -5,10 +5,12 @@ describe 'osquery', :type => :class do
   describe "class on Redhat 6 family with no parameters, basic test" do
     let :facts do
       {
+        :osfamily => 'RedHat',
         :operatingsystem => 'Redhat',
         :operatingsystemmajrelease => '6',
         :architecture => 'x86_64',
-        :processorcount => '2'
+        :processorcount => '2',
+        :kernel => 'Linux'
       }
     end
 
@@ -28,10 +30,12 @@ describe 'osquery', :type => :class do
   describe "class on Redhat 7 family with no parameters, basic test" do
     let :facts do
       {
+        :osfamily => 'RedHat',
         :operatingsystem => 'Redhat',
         :operatingsystemmajrelease => '7',
         :architecture => 'x86_64',
-        :processorcount => '2'
+        :processorcount => '2',
+        :kernel => 'Linux'
       }
     end
 
@@ -51,10 +55,12 @@ describe 'osquery', :type => :class do
   describe "class on CentOS 6 family with no parameters, basic test" do
     let :facts do
       {
+        :osfamily => 'RedHat',
         :operatingsystem => 'CentOS',
         :operatingsystemmajrelease => '6',
         :architecture => 'x86_64',
-        :processorcount => '2'
+        :processorcount => '2',
+        :kernel => 'Linux'
       }
     end
 
@@ -74,10 +80,12 @@ describe 'osquery', :type => :class do
   describe "class on CentOS 7 family with no parameters, basic test" do
     let :facts do
       {
+        :osfamily => 'RedHat',
         :operatingsystem => 'CentOS',
         :operatingsystemmajrelease => '7',
         :architecture => 'x86_64',
-        :processorcount => '2'
+        :processorcount => '2',
+        :kernel => 'Linux'
       }
     end
 
@@ -97,10 +105,12 @@ describe 'osquery', :type => :class do
   describe "class on Scientific linux family with no parameters, basic test" do
     let :facts do
       {
+        :osfamily => 'RedHat',
         :operatingsystem => 'Scientific',
         :operatingsystemmajrelease => '6',
         :architecture => 'x86_64',
-        :processorcount => '2'
+        :processorcount => '2',
+        :kernel => 'Linux'
       }
     end
 
@@ -120,10 +130,12 @@ describe 'osquery', :type => :class do
   describe "class on Amazon linux family with no parameters, basic test" do
     let :facts do
       {
+        :osfamily => 'RedHat',
         :operatingsystem => 'Amazon',
         :operatingsystemmajrelease => '6',
         :architecture => 'x86_64',
-        :processorcount => '2'
+        :processorcount => '2',
+        :kernel => 'Linux'
       }
     end
 
@@ -147,7 +159,8 @@ describe 'osquery', :type => :class do
           :operatingsystem => 'Nexenta',
           :operatingsystemmajrelease => '6',
           :architecture => 'x86_64',
-          :processorcount => '2'
+          :processorcount => '2',
+          :kernel => 'Solaris'
         }
       end
 

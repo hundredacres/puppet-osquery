@@ -16,7 +16,7 @@
 # [*service_name*]
 #   Package service name to be ran. Default is auto detect.
 #
-# [*settings_name*]
+# [*settings*]
 #   Hash of the OSquery settings to be converted automatically into a JSON string for the config file.
 #
 # [*repo_install*]
@@ -57,22 +57,15 @@
 #
 class osquery (
 
-  $package_name   = $::osquery::params::package_name,
-  $service_name   = $::osquery::params::service_name,
-  $package_ver    = $::osquery::params::package_ver,
-  $service_enable = $::osquery::params::service_enable,
-  $settings       = $::osquery::params::settings,
-  $flags          = $::osquery::params::flags,
-  $repo_install   = $::osquery::params::repo_install,
+  String $package_name    = $::osquery::params::package_name,
+  String $service_name    = $::osquery::params::service_name,
+  String $package_ver     = $::osquery::params::package_ver,
+  Boolean $service_enable = $::osquery::params::service_enable,
+  Hash $settings          = $::osquery::params::settings,
+  Array $flags            = $::osquery::params::flags,
+  Boolean $repo_install   = $::osquery::params::repo_install,
 
 ) inherits ::osquery::params {
-
-  validate_string($package_name)
-  validate_string($service_name)
-  validate_bool($service_enable)
-  validate_hash($settings)
-  validate_string($flags)
-  validate_bool($repo_install)
 
   class { '::osquery::install': } -> class { '::osquery::config': } ~> class { '::osquery::service': } -> Class['::osquery']
 

@@ -9,7 +9,7 @@ class osquery::params {
       'logger_plugin' => 'filesystem',
       'event_pubsub_expiry' => '86000',
       'debug' => false,
-      'worker_threads' => $::processorcount,
+      'worker_threads' => $facts['processorcount'],
     },
     'schedule' => {
       'info' => {
@@ -28,16 +28,30 @@ class osquery::params {
   $flag_config    = '/etc/osquery/osquery.flags'
   $repo_install   = true
 
+  case $::kernel {
+    'Windows': {
+      $config       = 'C:\ProgramData\osquery\osquery.conf'
+      $config_user  = 'SYSTEM'
+      $config_group = 'Administrators'
+    }
+    default: {
+      $config       = '/etc/osquery/osquery.conf'
+      $config_user  = 'root'
+      $config_group = 'root'
+    }
+  }
+
   case $::operatingsystem {
     'RedHat', 'CentOS', 'Amazon', 'Scientific', 'OracleLinux', 'OEL': {
-      $repo_name = "osquery-s3-centos${::operatingsystemmajrelease}-repo"
-      $repo_url  = "https://osquery-packages.s3.amazonaws.com/centos${::operatingsystemmajrelease}/noarch/osquery-s3-centos${::operatingsystemmajrelease}-repo-1-0.0.noarch.rpm"
+      $repo_name = "osquery-s3-centos${facts['os']['release']['major']}-repo"
+      $repo_url  = "https://osquery-packages.s3.amazonaws.com/centos${facts['os']['release']['major']}/noarch/osquery-s3-centos${facts['os']['release']['major']}-repo-1-0.0.noarch.rpm"
     }
-    'ubuntu': {
-      # $lsbdistcodename fact example: 'trusty'
-      $repo_url        = "[arch=${::architecture}] https://osquery-packages.s3.amazonaws.com/${::lsbdistcodename}"
+    'Ubuntu', 'Debian': {
+      $repo_url        = 'https://pkg.osquery.io/deb'
       $repo_key_id     = '1484120AC4E9F8A1A577AEEE97A80C63C9D8B80B'
       $repo_key_server = 'hkp://keyserver.ubuntu.com:80'
+    }
+    'windows': {
     }
     default: {
       fail("Unsupported platform: ${::operatingsystem}")

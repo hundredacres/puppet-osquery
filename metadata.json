@@ -1,6 +1,6 @@
 {
   "name": "bryana-osquery",
-  "version": "0.1.4",
+  "version": "0.2.4",
   "author": "Bryan Andrews",
   "summary": "OSQuery Puppet module",
   "license": "Apache-2.0",
@@ -8,7 +8,8 @@
   "project_page": "https://github.com/BIAndrews/puppet-osquery",
   "issues_url": "https://github.com/BIAndrews/puppet-osquery/issues",
   "dependencies": [
-    {"name":"puppetlabs-apt","version_requirement":">= 2.0.0"}
+    {"name":"puppetlabs-apt","version_requirement":">= 2.0.0"},
+    {"name":"puppetlabs-stdlib","version_requirement":">= 2.2.1"}
   ],
   "tags": ["osquery","security","compliance","pci-dss","audit"],
   "requirements": [
@@ -23,6 +24,13 @@
       "operatingsystemrelease": [
         "12.04",
         "14.04"
+      ]
+    },
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "8",
+        "9"
       ]
     },
     {
