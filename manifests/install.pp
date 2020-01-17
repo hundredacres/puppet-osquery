@@ -35,15 +35,19 @@ class osquery::install {
           }
           'RedHat': {
             # add the osquery yum repo package
-            package { $::osquery::repo_name:
-              ensure   => present,
-              source   => $::osquery::repo_url,
-              provider => 'rpm',
+            yumrepo { 'osquery-s3-rpm-repo' :
+              ensure   => 'present',
+              descr    => 'osquery RPM repository - $basearch',
+              baseurl  => 'https://s3.amazonaws.com/osquery-packages/rpm/$basearch/',
+              gpgkey   => 'https://pkg.osquery.io/rpm/GPG',
+              enabled  => '1',
+              gpgcheck => '1',
+              target   => '/etc/yum.repos.d/osquery-s3-rpm.repo',
             }
             # install the osquery package, requiring the yum repo package
             package { $::osquery::package_name:
               ensure  => $::osquery::package_ver,
-              require => Package[$::osquery::repo_name],
+              require => Yumrepo['osquery-s3-rpm-repo'],
             }
             # explicitly set ordering for installation of repo and package
             Package[$::osquery::repo_name] -> Package[$::osquery::package_name]
