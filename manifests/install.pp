@@ -44,6 +44,9 @@ class osquery::install {
               gpgcheck => '1',
               target   => '/etc/yum.repos.d/osquery-s3-rpm.repo',
             }
+            package { $::osquery::repo_name:
+              ensure   => absent,
+            }
             # install the osquery package, requiring the yum repo package
             package { $::osquery::package_name:
               ensure  => $::osquery::package_ver,
