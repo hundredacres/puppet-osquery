@@ -50,7 +50,7 @@ class osquery::install {
               require => Yumrepo['osquery-s3-rpm-repo'],
             }
             # explicitly set ordering for installation of repo and package
-            Package[$::osquery::repo_name] -> Package[$::osquery::package_name]
+            Yumrepo['osquery-s3-rpm-repo'] -> Package[$::osquery::package_name]
           }
           default: {
             fail("${::osfamily} not supported")
